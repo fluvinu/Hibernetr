@@ -1,3 +1,4 @@
+<%@page import="org.jsp.entity.Hotel"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -5,6 +6,17 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
+
+<script>
+function calculateDays() {
+    let checkinDate = new Date(document.getElementById("sd").value);
+    let checkoutDate = new Date(document.getElementById("ed").value);
+    let oneDay = 24 * 60 * 60 * 1000; // Hours*minutes*seconds*milliseconds
+    let diffDays = Math.round(Math.abs((checkoutDate - checkinDate) / oneDay));
+    document.getElementById("days").value = diffDays;
+    }
+
+</script>
 <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hotel</title>
@@ -76,7 +88,8 @@
         <div class="row justify-content-left">
           <div class="col-md-8">
               <h1 class="mb-4 " >User Registraion Form</h1>
-              <form action="donate"  method="post">
+              <form action="../bookhotel"  method="post">
+              <input hidden value ="<%-- <%=Hotel.getId() %> --%>" name="hotelId" >
                   <div class="row mb-3">
                       <div class="col">
                           <label for="firstname" class="form-label">First Name :</label>
@@ -87,7 +100,7 @@
                           <input type="text" class="form-control" placeholder="Last Name "  required >
                       </div>
                   </div>
-                  <div class="row mb-3">
+                  <div class="row mb-3">s
                         <div class="col">
                             <label for="email" class="form-label">Email :</label>
                             <input type="email" class="form-control"  placeholder="Email"  required >
@@ -108,10 +121,23 @@
                     </div>
                   </div>
                   <div class="row mb-3">
-                    <div class="col">
-                        <label for="noofdays" class="form-label">No of Days :</label>
-                        <input type="text" class="form-control"  placeholder="No of Days" required >
+                  
+                  	<div class="col">
+                        <label for="noofdays" oninput="calculateDays()"  class="form-label">Start Days :</label>
+                        <input type="datetime-local" class="form-control" id="sd"  placeholder="No of Days" required >
                     </div>
+                  
+                    <div class="col">
+                        <label for="noofdays"   class="form-label">endDate :</label>
+                        <input type="datetime-local" id="ed" class="form-control" oninput="calculateDays()"  placeholder="No of Days" required >
+                    </div>
+                    
+                    
+                     	<div class="col">
+                        <label for="noofdays" oninput="calculatePrice()" class="form-label">no of cadys</label>
+                        <input type="number" class="form-control"  placeholder="No of Days" required >
+                    </div>
+               
                     <div class="col">
                         <label for="noofpersons" class="form-label">No of Persons :</label>
                         <input type="number" class="form-control"  placeholder="No of Persons" required >

@@ -68,7 +68,7 @@
             </div>
             <ul class="navbar-nav ml-auto"> <!-- Add ml-auto class to push "Contact" to the right -->
                 <li class="nav-item">
-                  <a class="nav-link" href="#">LogOut</a>
+                  <a class="nav-link" href="../logout">LogOut</a>
                 </li>
               </ul>
         </nav>
